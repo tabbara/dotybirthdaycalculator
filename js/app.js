@@ -1,23 +1,27 @@
-// Place following code after FB.init call.
+var app = angular.module("myApp", [
+  "ui.router",
+  "mainModule"
+]);
 
-function onLogin(response) {
-  if (response.status == 'connected') {
-    FB.api('/me?fields=first_name', function(data) {
-      var welcomeBlock = document.getElementById('fb-welcome');
-      welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
-    });
-  }
-}
+angular.module("mainModule", []);
 
-FB.getLoginStatus(function(response) {
-  // Check login status on load, and if the user is
-  // already logged in, go directly to the welcome message.
-  if (response.status == 'connected') {
-    onLogin(response);
-  } else {
-    // Otherwise, show Login dialog first.
-    FB.login(function(response) {
-      onLogin(response);
-    }, {scope: 'user_friends, email'});
-  }
+angular.module('mainModule')
+.controller('mainCtrl', function($rootScope, $scope) {
+
+  console.log('loaded');
+
+});
+
+angular.module("myApp")
+.config( function($stateProvider, $urlRouterProvider) {
+
+  $urlRouterProvider.otherwise("/");
+
+  $stateProvider
+  .state('/', {
+    cache: false,
+    url: "/",
+    templateUrl: "views/main.html",
+    controller: "mainCtrl"
+  })
 });
