@@ -36,7 +36,7 @@ window.fbAsyncInit = function() {
       // Otherwise, show Login dialog first.
       FB.login(function(response) {
         onLogin(response);
-      }, {scope: 'user_friends, email, birthday'});
+      }, {scope: 'user_friends, email, user_birthday'});
     }
   });
 
