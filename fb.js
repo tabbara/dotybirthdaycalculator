@@ -19,6 +19,7 @@ window.fbAsyncInit = function() {
 //      });
 //
       FB.api('/me?fields=birthday', function(data) {
+        console.log(data);
         var welcomeBlock = document.getElementById('fb-welcome');
         welcomeBlock.innerHTML = 'Hello, ' + data.birthday + '!';
       });
