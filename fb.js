@@ -18,6 +18,10 @@ window.fbAsyncInit = function() {
 //        welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
 //      });
 //
+      FB.api('/me/permissions', function(data) {
+        console.log(data);
+      });
+
       FB.api('/me?fields=birthday', function(data) {
         console.log(data);
         var welcomeBlock = document.getElementById('fb-welcome');
