@@ -1,0 +1,79 @@
+<div class="mybirthday-wrap inner cover" id="content-wrapper">
+  <div ng-if="page.stage == 0">
+    <h1 ng-if="birthday.daysleft != 0" class="cover-heading center">Hi {{user.firstname}}</h1>
+    <h1 ng-if="birthday.daysleft == 0" class="cover-heading center">Happy Birthday {{user.firstname}}!</h1>
+    <!--  <p class="lead center">{{birthday.message}}</p>-->
+    <p class="lead center">
+      We've compiled a list of the world’s weird, funny, wonderful and bizarre holidays that share their date with your birthday,
+      <!--  <p style="font-size: 20px;">{{birthday.monthname}}, {{birthday.day}}</p>-->
+      <strong>{{birthday.monthname}}, {{birthday.day}}</strong>
+      . Check them out below!
+    </p>
+
+    <div ng-if="page.total > 0" class="card-container">
+
+
+      <div ng-repeat="day in days | startFrom: page.currentpage*page.pagesize | limitTo: page.pagesize" class="card card-wrapper">
+        <a ng-click="openDay(day)">
+          <div class="dayimage-container">
+            <!--      <div class="image-loading dayimage-container">-->
+            <!--        <div class="spinner-animation"></div>-->
+            <img ng-src="{{day.image.large.url}}" class="day-image">
+          </div>
+          <i class="badge badge-positive badge-overlay">{{day.tag.name}}</i>
+        </a>
+
+        <div class="card-title">
+          <a ng-click="openDay(day)">
+            <h2 class="stable" ng-bind-html="day.title"></h2>
+            <!--          <h4 class="stable">{{day.date | date:'mediumDate'}}</h4>-->
+          </a>
+        </div>
+      </div>
+
+      <div class="lead center showmore">
+        Page {{page.currentpage+1}} of {{page.totalpages + 1}}
+        <div>
+          <button ng-if="page.currentpage > 0" class="btn btn-lg btn-default button-clean button-showmore" ng-click="changePage(0);">
+            <span class="fa fa-chevron-left"></span> Previous Page
+          </button>
+          <button ng-if="page.currentpage < page.totalpages-1" class="btn btn-lg btn-default button-clean button-showmore" ng-click="changePage(1);">
+            Next Page <span class="fa fa-chevron-right"></span>
+          </button>
+          <button ng-if="page.currentpage == page.totalpages-1" class="btn btn-lg btn-default button-clean button-showmore" ng-click="changePage(2);">
+            Next Page <span class="fa fa-chevron-right"></span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div ng-if="page.stage == 1">
+    <h1 class="cover-heading center">Never miss a day!</h1>
+    <p class="lead center">
+      Who knew you shared your birthday with {{days[0].title}}, huh? Besides your birthday, the rest of the year is full of wonderful days, too! Sign up to our weekly newsletter and we'll keep you informed.
+    </p>
+
+    <div class="lead center">
+      <form novalidate  name="userForm">
+        <div class="input-group" style="margin: 10px auto 20px auto; width:300px;" ng-class="{ 'has-error': userForm.email.$invalid && userForm.email.$dirty}">
+          <span class="input-group-addon" id="basic-addon1" style="text-shadow: none;">Email</span>
+          <input type="email" name="email" class="form-control" placeholder="email@example.com" ng-model="user.email" required>
+        </div>
+        <p>
+<!--            <input type="submit" id="submit" value="Register" />-->
+          <button class="btn btn-lg btn-default button-clean" ng-click="userForm.$valid && signup.go();">
+            <span class="fa fa-envelope-o"></span> {{signup.message}}
+          </button>
+        </p>
+      </form>
+
+      <button style="background: transparent; color: white; border: none; margin-top: 10px" class="btn btn-default button-clean" ng-click="changePage(3);">
+        Go back
+      </button>
+    </div>
+  </div>
+
+
+</div>

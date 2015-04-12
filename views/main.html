@@ -1,12 +1,10 @@
-<div>
-
-  <div> Hello Bro </div>
-
-  <div
-       class="fb-like"
-       data-send="true"
-       data-width="450"
-       data-show-faces="true">
-  </div>
-
+<div class="showme-wrap inner cover center" ng-if="loginsuccess">
+  <h1 class="cover-heading">Calculate your Birthday</h1>
+  <p class="lead">Days of the Year presents the Birthday Calculator! Just press the button below to login with Facebook and we'll show you all the unique events that occur on your date of birth.</p>
+  <p class="lead">
+    <button class="btn btn-lg btn-default button-clean" ng-click="showme();"><span class="fa fa-facebook-official"></span> Show Me</button>
+    <br><br>
+    Our app requires Facebook Login <i class="fa fa-info-circle" data-toggle="tooltip" title="Your birthday is required to show you all the events happening on that date.">
+    </i>
+  </p>
 </div>
